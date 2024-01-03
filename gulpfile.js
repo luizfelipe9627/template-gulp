@@ -6,6 +6,7 @@ const concat = require("gulp-concat");
 const babel = require("gulp-babel");
 const uglify = require("gulp-uglify");
 const htmlmin = require("gulp-htmlmin");
+const imagemin = require("gulp-imagemin");
 
 function html() {
   return gulp
@@ -36,6 +37,14 @@ function scripts() {
     .pipe(browserSync.stream());
 }
 
+function images() {
+  return gulp
+    .src("./src/assets/**/*")
+    .pipe(imagemin())
+    .pipe(gulp.dest("dist"))
+    .pipe(browserSync.stream());
+}
+
 function browser() {
   browserSync.init({
     server: {
@@ -48,13 +57,15 @@ function sentinel() {
   gulp.watch("./src/templates/**/*.html", html);
   gulp.watch("./src/styles/**/*.scss", styles);
   gulp.watch("./src/scripts/**/*.js", scripts);
+  gulp.watch("./src/assets/**/*", images);
 }
 
 exports.html = html;
 exports.styles = styles;
 exports.scripts = scripts;
+exports.images = images;
 exports.browser = browser;
 exports.sentinel = sentinel;
 
-exports.build = gulp.series(html, styles, scripts);
-exports.default = gulp.parallel(html, styles, scripts, browser, sentinel);
+exports.build = gulp.series(html, styles, scripts, images);
+exports.default = gulp.parallel(html, styles, scripts, images, browser, sentinel);
