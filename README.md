@@ -1,5 +1,3 @@
-# Template Gulp
-
 ## Gulp
 
 O [Gulp](https://gulpjs.com/) é uma ferramenta de automação de tarefas em JavaScript, amplamente utilizada para simplificar o processo de desenvolvimento web. Ele permite automatizar tarefas repetitivas, como minificação de código, concatenação de arquivos, recarga automática do navegador e muito mais.
